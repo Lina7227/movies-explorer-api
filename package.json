@@ -1,0 +1,40 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "server for the diplom project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lina7227/movies-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "Lina7227",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lina7227/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Lina7227/movies-explorer-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "celebrate": "^15.0.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "nodemon": "^2.0.15"
+  }
+}
