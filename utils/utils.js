@@ -1,6 +1,6 @@
 const corsOptions = [
-  // 'https://api.lina.front.nomoredomains.work',
-  // 'https://lina.front.nomoredomains.xyz',
+  'https://api.gallery-movies.nomoredomains.xyz',
+  'https://gallery-movies.nomoredomains.xyz',
   'http://localhost:3001',
   'http://localhost:3000',
   'https://web.postman.co',

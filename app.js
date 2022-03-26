@@ -12,7 +12,7 @@ const corsOptions = require('./utils/utils');
 
 const app = express();
 
-const { NODE_ENV, PORT } = process.env;
+const { PORT = 3000 } = process.env;
 
 app.use(corsOptions);
 
@@ -37,4 +37,6 @@ app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
-app.listen(NODE_ENV === 'production' ? PORT : 3000);
+app.listen(PORT, () => {
+
+});
