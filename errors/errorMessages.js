@@ -1,6 +1,6 @@
 const invalidName = 'Неправильное имя';
-const invalidLink = 'Невалидная ссылка';
-const invalidAuth = 'Неверный E-mail или пароль';
+const invalidLink = 'Ссылка некорректна. Введите корректную ссылку';
+const invalidAuth = 'Почта или пароль введены не верно';
 const invalidId = 'Указан неверный Id';
 const notMatchdMail = 'E-mail не соответствует требованиям';
 const notMAtchPassword = 'Пароль не соответствует требованиям (минимум 6 знаков)';
@@ -10,6 +10,7 @@ const userAlreadyBe = 'Пользователь с таким E-mail уже су
 const userNotAuthorized = 'Пользователь не авторизован';
 const notFoundFilmId = 'Фильм по указанному _id не найден';
 const noRightsDeelete = 'У вас нет прав для удаления этого фильма';
+const exitSuccessful = 'Выход из аккаутна успешно совершен';
 
 module.exports = {
   invalidName,
@@ -24,4 +25,5 @@ module.exports = {
   userNotAuthorized,
   notFoundFilmId,
   noRightsDeelete,
+  exitSuccessful,
 };

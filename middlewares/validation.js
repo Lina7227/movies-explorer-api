@@ -12,13 +12,12 @@ const validatyUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(6),
   }),
 });
 
 const validatySigUp = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(6),
   }),
@@ -34,15 +33,14 @@ const validatySigIn = celebrate({
 const validateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
-    director: Joi.string().custom(validatelink).required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().custom(validatelink).required(),
-    trailerLink: Joi.string().required().custom(validatelink),
+    trailerLink: Joi.string().custom(validatelink).required(),
     thumbnail: Joi.string().custom(validatelink).required(),
-    owner: Joi.string().length(24).hex().required(),
-    movieId: Joi.string().length(24).hex().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),

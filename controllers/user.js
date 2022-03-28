@@ -9,7 +9,8 @@ const {
   notFoundUserId,
   incorrectData,
   userAlreadyBe,
-  userNotAuthorized,
+  invalidAuth,
+  exitSuccessful,
 } = require('../errors/errorMessages');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -28,7 +29,7 @@ const createUser = (req, res, next) => {
       res.send(user.toJSON());
     })
     .catch((err) => {
-      if (err.message === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         next(new BadRequest(incorrectData));
       } else if (err.code === 11000) {
         next(new ConflictingPrompt(userAlreadyBe));
@@ -47,7 +48,9 @@ const updateUserInfo = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        next(new BadRequest(userAlreadyBe));
+        next(new BadRequest(incorrectData));
+      } else if (err.name === 'MongoError' && err.code === 11000) {
+        next(new ConflictingPrompt(userAlreadyBe));
       } else {
         next(err);
       }
@@ -63,27 +66,25 @@ const login = (req, res, next) => {
       res.cookie('jwt', `Bearer ${token}`, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
-        domain: '.gallery-movies.nomoredomains.xyz',
+        // domain: '.gallery-movies.nomoredomains.xyz',
         sameSite: 'none',
         secure: true,
       })
         .status(200).send({ id: user._id });
     })
     .catch(() => {
-      next(new Unauthorized(userNotAuthorized));
+      next(new Unauthorized(invalidAuth));
     });
 };
 
 const getUser = (req, res, next) => {
   User.findById(req.user._id)
-    .orFail(new Error('NotValidId'))
+    .orFail(new NotFound(notFoundUserId))
     .then((user) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.kind === 'ObjectId' || err.message === 'NotValidId') {
-        next(new NotFound(notFoundUserId));
-      } else if (err.user === 'CastError') {
+      if (err.kind === 'ObjectId' || err.name === 'CastError') {
         next(new BadRequest(incorrectData));
       } else {
         next(err);
@@ -94,7 +95,7 @@ const getUser = (req, res, next) => {
 const logout = (req, res, next) => {
   try {
     res.clearCookie('jwt');
-    res.status(200).send({ message: 'Выход из аккаутна успешно совершен' });
+    res.status(200).send(exitSuccessful);
   } catch (err) {
     next(err);
   }

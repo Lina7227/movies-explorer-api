@@ -12,7 +12,7 @@ const corsOptions = require('./utils/utils');
 
 const app = express();
 
-const { PORT = 3000 } = process.env;
+const { PORT } = process.env;
 
 app.use(corsOptions);
 
@@ -37,6 +37,4 @@ app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
-app.listen(PORT, () => {
-
-});
+app.listen(PORT);
