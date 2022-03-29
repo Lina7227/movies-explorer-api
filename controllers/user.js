@@ -12,8 +12,7 @@ const {
   invalidAuth,
   exitSuccessful,
 } = require('../errors/errorMessages');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { KEY_JWT } = require('../utils/constant');
 
 const createUser = (req, res, next) => {
   const {
@@ -47,9 +46,9 @@ const updateUserInfo = (req, res, next) => {
     .orFail(() => new NotFound(notFoundUserId))
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         next(new BadRequest(incorrectData));
-      } else if (err.name === 'MongoError' && err.code === 11000) {
+      } else if (err.code === 11000) {
         next(new ConflictingPrompt(userAlreadyBe));
       } else {
         next(err);
@@ -62,7 +61,7 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, KEY_JWT, { expiresIn: '7d' });
       res.cookie('jwt', `Bearer ${token}`, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
@@ -84,7 +83,7 @@ const getUser = (req, res, next) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.kind === 'ObjectId' || err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new BadRequest(incorrectData));
       } else {
         next(err);

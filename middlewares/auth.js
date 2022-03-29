@@ -1,7 +1,6 @@
 const jwtToken = require('jsonwebtoken');
 const Unauthorized = require('../errors/Unauthorized ');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { KEY_JWT } = require('../utils/constant');
 
 /* eslint-disable consistent-return */
 module.exports = (req, res, next) => {
@@ -13,7 +12,7 @@ module.exports = (req, res, next) => {
 
   let payload;
   try {
-    payload = jwtToken.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwtToken.verify(token, KEY_JWT);
     req.user = payload;
     next();
   } catch (err) {
