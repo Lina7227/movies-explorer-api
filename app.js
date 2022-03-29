@@ -9,7 +9,6 @@ const auth = require('./middlewares/auth');
 const { errorsHandler } = require('./middlewares/errorsHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const corsOptions = require('./utils/utils');
-const rateLimiter = require('./middlewares/rateLimiter');
 const BD_URL = require('./utils/constant');
 
 const app = express();
@@ -28,7 +27,6 @@ mongoose.connect(BD_URL, {
 app.use(requestLogger);
 
 app.use(helmet());
-app.use(rateLimiter);
 
 app.use(express.json());
 
