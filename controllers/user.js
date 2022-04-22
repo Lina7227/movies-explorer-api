@@ -94,7 +94,7 @@ const getUser = (req, res, next) => {
 const logout = (req, res, next) => {
   try {
     res.clearCookie('jwt');
-    res.status(200).send(exitSuccessful);
+    res.status(200).send({ message: exitSuccessful });
   } catch (err) {
     next(err);
   }
