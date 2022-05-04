@@ -4,12 +4,11 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const cors = require('cors');
 const router = require('./routes/index');
 const auth = require('./middlewares/auth');
 const { errorsHandler } = require('./middlewares/errorsHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const corsOptions = require('./utils/utils');
+const corsOptions = require('./utils/utils');
 const rateLimiter = require('./middlewares/rateLimiter');
 const { BD_URL } = require('./utils/constant');
 
@@ -17,23 +16,7 @@ const app = express();
 
 const { PORT = 3000 } = process.env;
 
-const corsOptions = {
-  origin: [
-    'https://diploma-gallery-movies.herokuapp.com',
-    'https://movies-explorer-frontend-black.vercel.app',
-    'https://movies-explorer-frontend-git-main-lina7227.vercel.app',
-    'https://movies-explorer-frontend-lina7227.vercel.app',
-    'http://localhost:3001',
-    'http://localhost:3000',
-    'https://web.postman.co',
-  ],
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-
-// app.use(corsOptions);
+app.use(corsOptions);
 app.use(requestLogger);
 app.use(cookieParser());
 
