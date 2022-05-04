@@ -1,6 +1,6 @@
 const corsOptions = [
-  'https://api.gallery-movies.nomoredomains.xyz',
-  'https://gallery-movies.nomoredomains.xyz',
+  'https://diploma-gallery-movies.herokuapp.com/',
+  'https://diploma-gallery-movies.vercel.app/',
   'http://localhost:3001',
   'http://localhost:3000',
   'https://web.postman.co',
