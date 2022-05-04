@@ -1,10 +1,13 @@
-const corsOptions = [
-  'https://diploma-gallery-movies.herokuapp.com',
-  'https://movies-explorer-frontend-black.vercel.app',
-  'http://localhost:3001',
-  'http://localhost:3000',
-  'https://web.postman.co',
-];
+const corsOptions = {
+  origin: [
+    'https://diploma-gallery-movies.herokuapp.com',
+    'https://movies-explorer-frontend-black.vercel.app',
+    'http://localhost:3001',
+    'http://localhost:3000',
+    'https://web.postman.co',
+  ],
+  credentials: true,
+};
 
 /* eslint-disable consistent-return */
 module.exports = (req, res, next) => {
