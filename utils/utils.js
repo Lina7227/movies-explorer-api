@@ -1,8 +1,8 @@
 const corsOptions = [
-  'https://diploma-gallery-movies.herokuapp.com',
-  'https://movies-explorer-frontend-black.vercel.app',
-  'https://movies-explorer-frontend-git-main-lina7227.vercel.app',
-  'https://movies-explorer-frontend-lina7227.vercel.app',
+  'https://diploma-gallery-movies.herokuapp.com/',
+  'https://movies-explorer-frontend-black.vercel.app/',
+  'https://movies-explorer-frontend-git-main-lina7227.vercel.app/',
+  'https://movies-explorer-frontend-lina7227.vercel.app/',
   'http://localhost:3001',
   'http://localhost:3000',
   'https://web.postman.co',
