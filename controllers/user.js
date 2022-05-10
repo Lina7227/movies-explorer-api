@@ -65,7 +65,6 @@ const login = (req, res, next) => {
       res.cookie('jwt', `Bearer ${token}`, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
-        // domain: '.gallery-movies.nomoredomains.xyz',
         sameSite: 'none',
         secure: true,
       })
